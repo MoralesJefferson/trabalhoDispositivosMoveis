@@ -1,18 +1,39 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import Btn from "../Components/Btn";
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const onchangetext = (identific, value) => {
     if (identific === "email") {
-      console.log("email");
       setUser({ email: value, password: user.password });
     } else if (identific === "password") {
-      console.log("password");
       setUser({ email: user.email, password: value });
     }
   };
+  const dataValidation = () => {
+    if (user.email) {
+      let email = [...user.email];
+      if (email.indexOf("@") === -1) {
+        Alert.alert("informe um E-mail '@' válido!!!");
+        return false;
+      }
+    }else{
+      Alert.alert("E-mail inválido. não pode ser vazio!!!");
+      return false;
+    }
+    if (user.password) {
+      if(user.password.length < 6){
+        Alert.alert("Password inválido. minimo 6 caracter!!!");
+        return false;
+      }      
+    }else{
+      Alert.alert("Password inválido. não pode ser vazio!!!");
+      return false;
+    }
+    console.log('redirecionar')
+  };
+
   return (
     <View style={styles.login}>
       <TextInput
@@ -29,7 +50,12 @@ const Login = () => {
         onChangeText={(value) => onchangetext("password", value)}
         secureTextEntry={true}
       />
-      <Btn texto='entrar' estilo={{backgroundColor:'#393d96',width:'50%'}}/>
+
+      <Btn
+        texto="entrar"
+        estilo={{ backgroundColor: "#393d96", width: "50%" }}
+        func={dataValidation}
+      />
     </View>
   );
 };
@@ -41,17 +67,14 @@ const styles = StyleSheet.create({
   login: {
     flex: 1,
     backgroundColor: "#ffffff",
-    alignItems:"center",
-    justifyContent:"center",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  input:{
-    borderWidth:1,
-    width:'100%',
-    padding:10,
-    borderRadius:5,
-    marginBottom:10,
-  }
-  
-    
-  
+  input: {
+    borderWidth: 1,
+    width: "100%",
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
 });
