@@ -1,8 +1,16 @@
 import { useState } from "react";
-import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Alert,
+  Button,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import Btn from "../Components/Btn";
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [user, setUser] = useState({ email: "", password: "" });
   const onchangetext = (identific, value) => {
     if (identific === "email") {
@@ -18,57 +26,80 @@ const Login = () => {
         Alert.alert("informe um E-mail '@' válido!!!");
         return false;
       }
-    }else{
+    } else {
       Alert.alert("E-mail inválido. não pode ser vazio!!!");
       return false;
     }
     if (user.password) {
-      if(user.password.length < 6){
+      if (user.password.length < 6) {
         Alert.alert("Password inválido. minimo 6 caracter!!!");
         return false;
-      }      
-    }else{
+      }
+    } else {
       Alert.alert("Password inválido. não pode ser vazio!!!");
       return false;
     }
-    console.log('redirecionar')
+    navigation.navigate("Home");
   };
 
   return (
     <View style={styles.login}>
-      <TextInput
-        style={styles.input}
-        value={user.email}
-        placeholder="E-mail"
-        onChangeText={(value) => onchangetext("email", value)}
-      />
+      <ImageBackground
+        source={require("../../assets/cardLoginP.png")}
+        style={styles.headerImage}
+      >
+        <View style={styles.boxLogin}>
+          <TextInput
+            style={styles.input}
+            value={user.email}
+            placeholder="E-mail"
+            placeholderTextColor="#ffffff9a"
+            onChangeText={(value) => onchangetext("email", value)}
+          />
 
-      <TextInput
-        style={styles.input}
-        value={user.password}
-        placeholder="Password"
-        onChangeText={(value) => onchangetext("password", value)}
-        secureTextEntry={true}
-      />
+          <TextInput
+            style={styles.input}
+            value={user.password}
+            placeholder="Password"
+            placeholderTextColor="#ffffff9a"
+            onChangeText={(value) => onchangetext("password", value)}
+            secureTextEntry={true}
+          />
 
-      <Btn
-        texto="entrar"
-        estilo={{ backgroundColor: "#393d96", width: "50%" }}
-        func={dataValidation}
-      />
+          <Btn
+            texto="entrar"
+            estilo={{ backgroundColor: "#222222b4", width: "50%" }}
+            func={dataValidation}
+          />
+        </View>
+      </ImageBackground>
     </View>
   );
 };
 
 export default Login;
-/*<Button style={styles.btn} title="Entrar" onPress={'*'} />*/
 
 const styles = StyleSheet.create({
   login: {
     flex: 1,
     backgroundColor: "#ffffff",
+  },
+  headerImage: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  boxLogin: {
+    width: "100%",
+    height: 200,
+    backgroundColor: "#831711ad",
     alignItems: "center",
     justifyContent: "center",
+    padding: 15,
+    borderRadius: 15,
+    elevation: 5,
   },
   input: {
     borderWidth: 1,
@@ -76,5 +107,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginBottom: 10,
+    color: "#ffffff",
+    fontSize: 16,
+    borderColor: "#ffffff9a",
   },
 });

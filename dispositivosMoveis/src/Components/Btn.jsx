@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const Btn = ({ texto, estilo, func }) => {
   return (
-    <TouchableOpacity style={[styles.btn, estilo]} onPress={func} >
+    <TouchableOpacity style={[styles.btn, estilo]} onPress={func}>
       <Text style={styles.txt}>{texto}</Text>
     </TouchableOpacity>
   );
