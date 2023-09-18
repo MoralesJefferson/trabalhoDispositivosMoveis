@@ -2,6 +2,7 @@ import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, ImageBackground } from "react-native";
+import Btn from "../Components/Btn";
 
 const Detalhes = ({ navigation, route }) => {
   const [unit, setUnit] = useState({
@@ -37,6 +38,12 @@ const Detalhes = ({ navigation, route }) => {
   useEffect(() => {
     feth();
   }, []);
+  const exit = () => {
+    navigation.navigate("Login");
+  };
+  const goBack = () => {
+    navigation.navigate("Home");
+  };
 
   return (
     <LinearGradient
@@ -48,6 +55,30 @@ const Detalhes = ({ navigation, route }) => {
         source={require("../../assets/headerCard.png")}
         style={styles.headerImage}
       >
+        <View style={styles.btnNav}>
+          <Btn
+            texto={"Voltar"}
+            func={goBack}
+            estilo={{
+              backgroundColor: "transparent",
+              borderRadius: 8,
+              width: "17%",
+              paddingTop: 1,
+              paddingBotton: 3,
+            }}
+          />
+
+          <Btn
+            texto={"Sair"}
+            func={exit}
+            estilo={{
+              backgroundColor: "transparent",
+              borderRadius: 8,
+              width: "17%",
+              padding: 5,
+            }}
+          />
+        </View>
         <View style={styles.headerContent}>
           <View style={styles.subCaixa}>
             <View style={styles.col1}>
@@ -131,6 +162,13 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
     paddingTop: 10,
+  },
+  btnNav: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    position: "absolute",
+    bottom: 46,
   },
   texto: {
     fontSize: 20,

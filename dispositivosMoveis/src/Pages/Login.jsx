@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   Alert,
-  Button,
   ImageBackground,
   StyleSheet,
   Text,
@@ -68,7 +67,7 @@ const Login = ({ navigation }) => {
 
           <Btn
             texto="entrar"
-            estilo={{ backgroundColor: "#222222b4", width: "50%" }}
+            estilo={{ backgroundColor: "#222222b4", width: "50%", padding: 10 }}
             func={dataValidation}
           />
         </View>

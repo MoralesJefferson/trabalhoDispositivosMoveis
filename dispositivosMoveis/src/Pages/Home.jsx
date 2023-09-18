@@ -1,13 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  FlatList,
-  ImageBackground,
-} from "react-native";
+import { View, StyleSheet, FlatList, ImageBackground } from "react-native";
 import PokemonCard from "../Components/PokemonCard";
 import Btn from "../Components/Btn";
 import { LinearGradient } from "expo-linear-gradient";
@@ -20,9 +13,11 @@ const Home = ({ navigation }) => {
     (currentPage - 1) * 10
   }`;
   const totalPages = 3;
+
   const onPageChange = (page) => {
     setCurrentPage(page);
   };
+
   const fetch = async () => {
     try {
       const response = await axios.get(url);
@@ -66,13 +61,44 @@ const Home = ({ navigation }) => {
       setCurrentPage(currentPage - 1);
     }
   };
+  const exit = () => {
+    navigation.navigate("Login");
+  };
+  const redirect = () => {
+    navigation.navigate("CountryList");
+  };
 
   return (
     <View style={styles.home}>
       <ImageBackground
         source={require("../../assets/homeCard.png")}
         style={styles.headerImage}
-      ></ImageBackground>
+      >
+        <View style={styles.btnNav}>
+          <Btn
+            texto={"Sair"}
+            func={exit}
+            estilo={{
+              backgroundColor: "transparent",
+              borderRadius: 8,
+              width: "17%",
+              paddingTop: 1,
+              paddingBotton: 3,
+            }}
+          />
+
+          <Btn
+            texto={"Country"}
+            func={redirect}
+            estilo={{
+              backgroundColor: "transparent",
+              borderRadius: 8,
+              width: "17%",
+              padding: 5,
+            }}
+          />
+        </View>
+      </ImageBackground>
 
       <LinearGradient
         style={styles.gradient}
@@ -139,7 +165,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 117,
     resizeMode: "cover",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  btnNav: {
+    backgroundColor: "transparent",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });

@@ -11,7 +11,6 @@ const Btn = ({ texto, estilo, func }) => {
 export default Btn;
 const styles = StyleSheet.create({
   btn: {
-    padding: 10,
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
