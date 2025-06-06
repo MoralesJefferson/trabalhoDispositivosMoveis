@@ -19,7 +19,7 @@ const Detalhes = ({ navigation, route }) => {
 
   const feth = async () => {
     try {
-      const { data } = await axios.get(
+      const { data  } = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${id}`
       );
       setUnit({
